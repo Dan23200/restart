@@ -56,8 +56,9 @@ def reg_age(message):
     keyboard.add(key_yes)
     key_no = types.InlineKeyboardButton(text='нет', callback_data='no')
     keyboard.add(key_no)
-    question = "Тебе " + str(age) + ' лет ? И тебя зовут: ' + name + ' ' + surname + " ? "
+    question = f'Тебе {age} лет ? И тебя зовут {name} {surname}'
     bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
@@ -68,4 +69,9 @@ def callback_worker(call):
         bot.send_message(call.message.chat.id, 'Привет! давай познакомимся! Как тебя зовут ?')
         bot.register_next_step_handler(call.message, reg_name)
 
+
 bot.polling()
+
+
+
+
